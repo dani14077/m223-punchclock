@@ -5,33 +5,56 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Punchclock Client</title>
+        <title>coworking space</title>
         <link rel="stylesheet" type="text/css" href="style.css" />
         <script src="script.js" type="application/javascript"></script>
     </head>
     <body>
-        <form id="createEntryForm">
-            <label for="checkIn">Check in</label>
-            <input type="date" name="checkInDate" id="checkIn" required>
-            <input type="time" name="checkInTime" required>
-            <label for="checkOut">Check out</label>
-            <input type="date" name="checkOutDate" id="checkOut" required>
-            <input type="time" name="checkOutTime" required>
-            <input type="submit" value="Save" />
-        </form>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Check in</th>
-                    <th>Check out</th>
-                </tr>
-            </thead>
-            <tbody id="entryDisplay">
-                <tr>
-                    <td colspan="3">Loading...</td>
-                </tr>
-            </tbody>
-        </table>
+        <div id="login-container">
+            <form id="loginForm">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <input type="submit" value="Login" />
+            </form>
+        </div>
+
+        <div id="register-container">
+            <form id="registerForm">
+                <label for="registerFirstName">First Name:</label>
+                <input type="text" id="registerFirstName" name="firstName" required>
+                <label for="registerLastName">Last Name:</label>
+                <input type="text" id="registerLastName" name="lastName" required>
+                <label for="registerEmail">Email:</label>
+                <input type="email" id="registerEmail" name="email" required>
+                <label for="registerPassword">Password:</label>
+                <input type="password" id="registerPassword" name="password" required>
+                <input type="submit" value="Register" />
+            </form>
+        </div>
+
+        <div id="booking-container" style="display: none;">
+            <form id="createBookingForm">
+                <label for="bookingDate">Booking Date:</label>
+                <input type="date" id="bookingDate" name="bookingDate" required>
+                <input type="time" id="bookingTime" name="bookingTime" required>
+                <input type="submit" value="Create Booking" />
+            </form>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Booking Date</th>
+                    </tr>
+                </thead>
+                <tbody id="bookingDisplay">
+                    <tr>
+                        <td colspan="2">Loading...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>
