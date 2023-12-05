@@ -1,8 +1,6 @@
 package ch.zli.m223;
 
-// import java.time.LocalDateTime;
-// import java.util.Arrays;
-// import java.util.HashSet;
+import java.util.Date;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
@@ -10,8 +8,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
-// import ch.zli.m223.model.Booking;
-// import ch.zli.m223.model.Entry;
+import ch.zli.m223.model.ApplicationUser;
+import ch.zli.m223.model.Booking;
 import io.quarkus.arc.profile.IfBuildProfile;
 import io.quarkus.runtime.StartupEvent;
 
@@ -23,41 +21,37 @@ public class IntegrationTestDataService {
   EntityManager entityManager;
 
   @Transactional
-  void generateTestData(@Observes StartupEvent event) {
+    void generateTestData(@Observes StartupEvent event) {
+        // Create test users
+        var user1 = new ApplicationUser();
+        user1.setFirstName("user1");
+        user1.setLastName("user1");
+        user1.setEmail("user1@example.com");
+        user1.setPassword("password1");
+        user1.setRole("User");
+        entityManager.persist(user1);
 
-    // Categories
-    // var projectACategory = new Booking();
-    // projectACategory.setTitle("Project A");
-    // entityManager.persist(projectACategory);
+        var user2 = new ApplicationUser();
+        user2.setFirstName("user2");
+        user2.setLastName("user2");
+        user2.setEmail("user2@example.com");
+        user2.setPassword("password2");
+        user2.setRole("Admin");
+        entityManager.persist(user2);
 
-    // var projectBCategory = new Booking();
-    // projectBCategory.setTitle("Project B");
-    // entityManager.persist(projectBCategory);
+        // Create test bookings
+        var booking1 = new Booking();
+        booking1.setApplicationUser(user1);
+        booking1.setDate(new Date(2023-12-07));
+        booking1.setType("Morning");
+        booking1.setStatus("Pending");
+        entityManager.persist(booking1);
 
-    // var projectCCategory = new Booking();
-    // projectCCategory.setTitle("Project C");
-    // entityManager.persist(projectCCategory);
-
-    // Entries
-    // var firstEntry = new Entry();
-    // firstEntry.setBooking(projectACategory);
-    // firstEntry.setTags(new HashSet<>(Arrays.asList(programmingTag, debuggingTag)));
-    // firstEntry.setCheckIn(LocalDateTime.now().minusHours(3));
-    // firstEntry.setCheckOut(LocalDateTime.now().minusHours(2));
-    // entityManager.persist(firstEntry);
-
-    // var secondEntry = new Entry();
-    // secondEntry.setBooking(projectACategory);
-    // secondEntry.setTags(new HashSet<>(Arrays.asList(meetingTag)));
-    // secondEntry.setCheckIn(LocalDateTime.now().minusHours(2));
-    // secondEntry.setCheckOut(LocalDateTime.now().minusHours(1));
-    // entityManager.persist(secondEntry);
-
-    // var thirdEntry = new Entry();
-    // thirdEntry.setBooking(projectBCategory);
-    // thirdEntry.setTags(new HashSet<>(Arrays.asList(programmingTag)));
-    // thirdEntry.setCheckIn(LocalDateTime.now().minusHours(1));
-    // thirdEntry.setCheckOut(LocalDateTime.now());
-    // entityManager.persist(thirdEntry);
-  }
+        var booking2 = new Booking();
+        booking2.setApplicationUser(user2);
+        booking2.setDate(new Date(2023-05-11));
+        booking2.setType("Afternoon");
+        booking2.setStatus("Accepted");
+        entityManager.persist(booking2);
+    }
 }

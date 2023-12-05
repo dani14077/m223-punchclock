@@ -35,7 +35,7 @@ public class ApplicationUserController {
     SessionService sessionService;
 
     @GET
-    @RolesAllowed( "user" )
+    @RolesAllowed( "admin" )
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Index all users.", description = "Returns a list of all users.")
     public List<ApplicationUser> index() {
@@ -63,7 +63,7 @@ public class ApplicationUserController {
     }
 
     @Path("/{id}")
-    @RolesAllowed( "user" )
+    @RolesAllowed( "admin" )
     @DELETE
     @Operation(summary = "Deletes an user.", description = "Deletes an user by its id.")
     public void delete(@PathParam("id") Long id) {
@@ -71,7 +71,7 @@ public class ApplicationUserController {
     }
 
     @Path("/{id}")
-    @RolesAllowed({ "user" })
+    @RolesAllowed({ "admin" })
     @PUT
     @Operation(summary = "Updates an user.", description = "Updates an user by its id.")
     public ApplicationUser update(@PathParam("id") Long id, ApplicationUser user) {
