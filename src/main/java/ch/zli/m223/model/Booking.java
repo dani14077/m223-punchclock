@@ -14,6 +14,8 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Booking {
@@ -43,7 +45,7 @@ public class Booking {
     public void setId(Long id) {
         this.id = id;
     }
-
+    @JsonIgnore
     public ApplicationUser getApplicationUser() {
         return applicationUser;
     }

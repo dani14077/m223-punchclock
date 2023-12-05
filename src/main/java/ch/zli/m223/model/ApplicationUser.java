@@ -28,16 +28,16 @@ public class ApplicationUser {
   @Schema(readOnly = true)
   private Long id;
 
-  @Column(nullable = false)
+  @Column
   private String firstName;
 
-  @Column(nullable = false)
+  @Column
   private String lastName;
   
-  @Column(nullable = false, unique = true)
+  @Column(unique = true)
   private String email;
 
-  @Column(nullable = false)
+  @Column
   private String password;
 
   @Column

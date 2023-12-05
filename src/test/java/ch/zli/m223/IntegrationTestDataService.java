@@ -28,7 +28,7 @@ public class IntegrationTestDataService {
         user1.setLastName("user1");
         user1.setEmail("user1@example.com");
         user1.setPassword("password1");
-        user1.setRole("User");
+        user1.setRole("user");
         entityManager.persist(user1);
 
         var user2 = new ApplicationUser();
@@ -36,7 +36,7 @@ public class IntegrationTestDataService {
         user2.setLastName("user2");
         user2.setEmail("user2@example.com");
         user2.setPassword("password2");
-        user2.setRole("Admin");
+        user2.setRole("admin");
         entityManager.persist(user2);
 
         // Create test bookings

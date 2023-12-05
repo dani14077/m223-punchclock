@@ -28,6 +28,7 @@ const createBooking = (e) => {
 };
 
 const indexBookings = () => {
+    console.log(localStorage);
     fetch(`${URL}/bookings`, {
         method: 'GET',
         headers: {
@@ -74,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function(){
             password: formData.get('password')
         };
 
-        fetch(`${URL}/users/login`, {
+        fetch(`${URL}/session`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -82,9 +83,12 @@ document.addEventListener('DOMContentLoaded', function(){
             body: JSON.stringify(credential)
         }).then((response) => {
             if (response.ok) {
+                const token = response.headers.get('Authorization')
+                console.log('Token:', token);
+
+                localStorage.setItem('jwtToken', token);
                 response.json().then((user) => {
                     // Store the JWT token in local storage
-                    localStorage.setItem('jwtToken', user.token);
 
                     // Update the logged-in user
                     loggedInUser = user;

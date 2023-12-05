@@ -5,6 +5,7 @@ import java.util.List;
 // import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -49,7 +50,11 @@ public class BookingController {
         description = "Creates a new booking and returns the newly added booking."
     )
     public Booking create(Booking booking) {
-       return bookingService.createBooking(booking);
+      if (booking.getApplicationUser() == null || booking.getApplicationUser().getId() == null) {
+            throw new BadRequestException("ApplicationUser must be set for the booking.");
+        }
+
+        return bookingService.createBooking(booking);
     }
 
     @Path("/{id}")
